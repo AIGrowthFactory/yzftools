@@ -24,18 +24,13 @@ const formSchema = z.object({
     .max(100, { message: "E-posta adresi en fazla 100 karakter olabilir." }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters." })
-    .max(100, { message: "Password must be less than 100 characters." }),
+    .min(8, { message: "Şifre en az 8 karakter olmalıdır." })
+    .max(100, { message: "Şifre en fazla 100 karakter olabilir." }),
 });
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const { userLoggedIn } = useAuth();
-
-  useEffect(() => {
-    console.log("LOADING: ", loading);
-    console.log("LOGGED IN?: ", userLoggedIn);
-  }, [loading, userLoggedIn]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,11 +43,9 @@ const Login = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
-
       await doSignInWithEmailAndPassword(values.email, values.password);
     } catch (error) {
-      console.error("Error signing in:", error);
-
+      console.error("Giriş yaparken hata oluştu:", error);
       alert(error);
     } finally {
       setLoading(false);
@@ -62,69 +55,66 @@ const Login = () => {
   return (
     <>
       {userLoggedIn && <Navigate to={"/app"} replace={true} />}
-      <div className="h-screen w-screen bg-zinc-950">
-        <div className="h-full w-full flex flex-col items-center justify-center">
-          <div className="bg-gray-800 rounded-none h-full w-full p-8 lg:w-2/5 lg:h-1/2 lg:rounded-xl">
-            <div className="h-full w-full flex flex-col justify-between gap-4">
-              <div>
-                <p className="font-bold text-4xl text-white pb-4">Giriş Yap</p>
-                <p className="text-lg text-white">
-                  Giriş yaparak bütün projelerden faydalanabilirsiniz.
-                </p>
-              </div>
-
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="flex flex-col gap-8"
-                >
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white">E-posta</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="e-posta"
-                            disabled={loading}
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white">Şifre</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="password"
-                            placeholder="şifre"
-                            disabled={loading}
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </form>
-              </Form>
-              <Button
-                size={"lg"}
-                className="mt-4"
-                onClick={form.handleSubmit(onSubmit)}
-                disabled={loading}
-              >
-                Giriş
-              </Button>
-            </div>
+      <div className="h-screen w-screen bg-[#FDFDFD] flex items-center justify-center">
+        <div className="rounded-none p-8 w-full max-w-md lg:rounded-xl">
+          <div className="flex flex-col justify-center items-center">
+            <img
+              src="./images/logo.png"
+              alt="Logo"
+              className="w-40 h-32 object-contain"
+            />
+            <p className="font-semibold text-2xl">Giriş Yap</p>
+            <p className="text-sm text-[#666666]"></p>
           </div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>E-posta adresi</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={loading}
+                        className="border-[#7BB3E7] focus:ring-[#7BB3E7] focus:border-[#7BB3E7]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Şifre</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        disabled={loading}
+                        className="border-[#7BB3E7] focus:ring-[#7BB3E7] focus:border-[#7BB3E7]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex justify-center">
+                <Button
+                  size="default"
+                  className="mt-4 w-[60%] bg-[#7BB3E7] text-white hover:bg-[#5690C5]"
+                  onClick={form.handleSubmit(onSubmit)}
+                  disabled={loading}
+                >
+                  Giriş Yap
+                </Button>
+              </div>
+            </form>
+          </Form>
         </div>
       </div>
     </>

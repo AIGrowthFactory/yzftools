@@ -54,9 +54,9 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <AuthContext.Provider value={value}>
       {loading ? (
-        <div className="h-screen w-screen bg-zinc-950">
+        <div className="h-screen w-screen bg-white">
           <div className="h-full w-full flex flex-col justify-center items-center">
-            <p className=" text-white">Loading...</p>
+            <p className=" text-black">Loading...</p>
           </div>
         </div>
       ) : (

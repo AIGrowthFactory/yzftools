@@ -18,9 +18,9 @@ const App: React.FC = () => {
 
     if (loading) {
       return (
-        <div className="h-screen w-screen bg-zinc-950">
+        <div className="h-screen w-screen bg-gray-100">
           <div className="h-full w-full flex flex-col justify-center items-center">
-            <p className="text-white">Loading...</p>
+            <p className="text-black">Loading...</p>
           </div>
         </div>
       );

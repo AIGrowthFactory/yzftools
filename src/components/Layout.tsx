@@ -120,7 +120,7 @@ const Layout = () => {
 
       <footer className="bg-white p-2">
         <div className="flex flex-col justify-center items-center gap-2">
-          <p className="text-blue-600 font-bold">&copy; YZF</p>
+          <p className="text-blue-600 font-bold">YZF</p>
         </div>
       </footer>
     </div>

@@ -15,7 +15,6 @@ const Project = () => {
   const [detail, setDetail] = useState({});
 
   if (!id || null || "") {
-    console.log("ID: ", id);
     navigate("/404", { replace: true });
     return null;
   }
@@ -26,8 +25,6 @@ const Project = () => {
         setLoading(true);
 
         const response = await getDocumentDetail("projects", id);
-
-        console.log(response);
 
         setDetail(response);
       } catch (error) {
