@@ -8,7 +8,9 @@ const App = () => {
         <Link to={"/project/Dm0EqIQmA0qe9INt1Ga7"}>
           <Card className="bg-white shadow-lg shadow-blue-500/50 h-40 flex flex-col justify-center">
             <CardContent>
-              <h2 className="text-lg font-bold mb-2">News Scrapping</h2>
+              <h2 className="text-lg font-bold mb-2">
+                Startups News Scrapping
+              </h2>
               <p className="text-sm mt-4">
                 Google arama sonuçlarını tarar ve öncelikli siteleri e-posta ile
                 gönderir.
